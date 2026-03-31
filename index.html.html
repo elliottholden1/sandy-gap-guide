@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sandy Gap Cottage — Welcome Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F3ED;
+    --warm-brown: #6B4A2A;
+    --dark-brown: #3D2810;
+    --light-tan: #E8DDD0;
+    --sage: #7A8C6E;
+    --rust: #A0522D;
+    --muted: #8A7968;
+    --border: #D4C4B0;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background: var(--cream);
+    color: var(--dark-brown);
+    min-height: 100vh;
+  }
+
+  .guide-wrap { max-width: 860px; margin: 0 auto; padding: 0 16px 60px; }
+
+  .cover {
+    text-align: center;
+    padding: 56px 24px 40px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .cover-ornament { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 20px; }
+  .ornament-line { width: 60px; height: 1px; background: var(--warm-brown); opacity: 0.4; }
+  .cover-icon { width: 56px; height: 56px; opacity: 0.85; }
+
+  .cover h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 44px; font-weight: 600;
+    color: var(--dark-brown); letter-spacing: 0.5px; line-height: 1.2;
+  }
+
+  .cover .subtitle {
+    font-family: 'Playfair Display', serif;
+    font-style: italic; font-size: 18px;
+    color: var(--warm-brown); margin-top: 10px; margin-bottom: 22px;
+  }
+
+  .cover-welcome {
+    font-size: 14px; color: var(--muted);
+    max-width: 480px; margin: 0 auto; line-height: 1.8; font-weight: 300;
+  }
+
+  .tabs {
+    display: flex; border-bottom: 1px solid var(--border);
+    background: var(--light-tan); overflow-x: auto;
+    position: sticky; top: 0; z-index: 10;
+  }
+
+  .tab {
+    padding: 12px 18px; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.6px; text-transform: uppercase;
+    color: var(--muted); cursor: pointer;
+    border-bottom: 2px solid transparent; white-space: nowrap;
+    transition: color 0.15s, border-color 0.15s; user-select: none;
+  }
+
+  .tab:hover { color: var(--warm-brown); }
+  .tab.active { color: var(--warm-brown); border-bottom-color: var(--rust); }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  .items-list { padding: 24px 28px; }
+
+  h3.sub {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px; font-weight: 600; color: var(--sage);
+    text-transform: uppercase; letter-spacing: 1px; margin: 22px 0 10px;
+  }
+  h3.sub:first-child { margin-top: 0; }
+
+  .item {
+    display: flex; gap: 10px; margin-bottom: 10px;
+    align-items: flex-start; font-size: 13.5px;
+    line-height: 1.7; color: var(--dark-brown); font-weight: 300;
+  }
+
+  .item-dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--rust); flex-shrink: 0; margin-top: 8px; opacity: 0.7;
+  }
+
+  .item strong { font-weight: 700; color: var(--warm-brown); }
+
+  .highlight-box {
+    background: rgba(107,74,42,0.07); border-left: 3px solid var(--rust);
+    border-radius: 0 4px 4px 0; padding: 12px 14px; margin-top: 12px;
+    font-size: 13px; font-weight: 300; color: var(--warm-brown); line-height: 1.65;
+  }
+
+  .warn-box {
+    background: rgba(160,82,45,0.08); border-left: 3px solid #c0622a;
+    border-radius: 0 4px 4px 0; padding: 12px 14px; margin-top: 10px;
+    font-size: 13px; font-weight: 400; color: #7a3a18; line-height: 1.65;
+  }
+
+  .nature-box {
+    background: rgba(122,140,110,0.1); border-left: 3px solid var(--sage);
+    border-radius: 0 4px 4px 0; padding: 12px 14px; margin-top: 4px; margin-bottom: 12px;
+    font-size: 13px; font-weight: 300; color: #4a5c3e; line-height: 1.65;
+  }
+
+  .checkin-strip {
+    display: flex; border: 1px solid var(--border);
+    border-radius: 6px; overflow: hidden; margin-bottom: 18px;
+  }
+
+  .checkin-block { flex: 1; padding: 16px 18px; text-align: center; }
+  .checkin-block:first-child { border-right: 1px solid var(--border); }
+  .checkin-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); font-weight: 700; margin-bottom: 5px; }
+  .checkin-time { font-family: 'Playfair Display', serif; font-size: 28px; color: var(--warm-brown); }
+
+  .wifi-box {
+    background: var(--light-tan); border: 1px solid var(--border);
+    border-radius: 6px; padding: 14px 18px; margin-bottom: 18px;
+  }
+
+  .wifi-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .wifi-row:last-child { margin-bottom: 0; }
+  .wifi-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.7px; color: var(--muted); font-weight: 700; min-width: 80px; }
+  .wifi-value { font-size: 14px; font-weight: 700; color: var(--dark-brown); letter-spacing: 0.5px; font-family: 'Courier New', monospace; }
+  .wifi-note { font-size: 12px; font-weight: 300; color: var(--muted); padding-top: 8px; margin-top: 8px; border-top: 1px solid var(--border); }
+
+  .lockbox-box {
+    background: white; border: 1px solid var(--border);
+    border-radius: 6px; padding: 14px 18px; margin-bottom: 18px;
+    display: flex; align-items: flex-start; gap: 14px;
+  }
+
+  .lockbox-text { font-size: 13.5px; font-weight: 300; line-height: 1.7; color: var(--dark-brown); }
+  .lockbox-text strong { font-weight: 700; color: var(--warm-brown); }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 10px; }
+
+  .info-card {
+    background: white; border: 1px solid var(--border);
+    border-radius: 6px; padding: 12px 14px;
+  }
+
+  .info-card .ic-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.7px; color: var(--muted); font-weight: 700; margin-bottom: 4px; }
+  .info-card .ic-value { font-size: 13px; font-weight: 400; color: var(--dark-brown); line-height: 1.5; }
+
+  .rec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 24px 28px; }
+
+  .rec-card { background: white; border: 1px solid var(--border); border-radius: 6px; padding: 14px 16px; }
+  .rec-card .rec-type { font-size: 10px; color: var(--sage); text-transform: uppercase; letter-spacing: 0.7px; margin-bottom: 4px; font-weight: 700; }
+  .rec-card .rec-name { font-weight: 700; font-size: 13.5px; color: var(--dark-brown); margin-bottom: 5px; }
+  .rec-card .rec-note { font-size: 12.5px; color: var(--muted); font-weight: 300; line-height: 1.55; }
+
+  .footer {
+    text-align: center; padding: 32px 16px 16px;
+    font-size: 12px; color: var(--muted); font-weight: 300; line-height: 1.9;
+    border-top: 1px solid var(--border); margin-top: 20px;
+  }
+
+  .footer .tagline { font-family: 'Playfair Display', serif; font-size: 17px; color: var(--warm-brown); margin-bottom: 4px; }
+
+  @media (max-width: 600px) {
+    .cover h1 { font-size: 32px; }
+    .rec-grid, .two-col { grid-template-columns: 1fr; }
+    .items-list { padding: 18px 16px; }
+    .rec-grid { padding: 18px 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="guide-wrap">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-ornament">
+      <div class="ornament-line"></div>
+      <svg class="cover-icon" viewBox="0 0 56 56" fill="none">
+        <path d="M28 8 L48 24 L48 48 L8 48 L8 24 Z" fill="none" stroke="#6B4A2A" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M8 24 L28 8 L48 24" fill="none" stroke="#6B4A2A" stroke-width="1.5" stroke-linejoin="round"/>
+        <rect x="20" y="34" width="16" height="14" fill="none" stroke="#6B4A2A" stroke-width="1.2"/>
+        <circle cx="34.5" cy="41" r="1.2" fill="#6B4A2A" opacity="0.5"/>
+        <rect x="24" y="22" width="8" height="8" fill="none" stroke="#A0522D" stroke-width="1" opacity="0.7"/>
+        <path d="M16 24 Q28 6 40 24" fill="none" stroke="#7A8C6E" stroke-width="1" opacity="0.5" stroke-dasharray="2 2"/>
+      </svg>
+      <div class="ornament-line"></div>
+    </div>
+    <h1>Sandy Gap Cottage</h1>
+    <p class="subtitle">A warm welcome from our home to yours</p>
+    <p class="cover-welcome">Everything you need to know for a wonderful stay — from the quirks of the cottage to the best spots nearby. We hope you feel right at home.</p>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <div class="tab active" data-tab="essentials">Essentials</div>
+    <div class="tab" data-tab="house">The House</div>
+    <div class="tab" data-tab="outside">Outside</div>
+    <div class="tab" data-tab="rules">House Rules</div>
+    <div class="tab" data-tab="local">Local Tips</div>
+    <div class="tab" data-tab="emergency">Help &amp; Emergency</div>
+  </div>
+
+  <!-- ===================== ESSENTIALS ===================== -->
+  <div id="essentials" class="tab-panel active">
+    <div class="items-list">
+
+      <div class="checkin-strip">
+        <div class="checkin-block">
+          <div class="checkin-label">Check-in from</div>
+          <div class="checkin-time">15:00</div>
+        </div>
+        <div class="checkin-block">
+          <div class="checkin-label">Check-out by</div>
+          <div class="checkin-time">11:00</div>
+        </div>
+      </div>
+
+      <div class="lockbox-box">
+        <div style="flex-shrink:0;margin-top:2px;">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <rect x="5" y="13" width="18" height="13" rx="2" stroke="#A0522D" stroke-width="1.3"/>
+            <path d="M9 13V9a5 5 0 0 1 10 0v4" stroke="#A0522D" stroke-width="1.3" stroke-linecap="round"/>
+            <circle cx="14" cy="19.5" r="2" fill="#A0522D" opacity="0.6"/>
+          </svg>
+        </div>
+        <div class="lockbox-text">
+          <strong>Lock box</strong> — on the wall beside the front door, under the light.<br>
+          Your unique entry code will be sent via the platform you booked through. To open: set the code, pull the black tab and pull down. Return the key to the lock box and scramble the code on check-out. Spare keys are in the kitchen drawer if needed.
+        </div>
+      </div>
+
+      <div class="wifi-box">
+        <div class="wifi-row">
+          <span class="wifi-label">Network</span>
+          <span class="wifi-value">BT-RNA8RQ</span>
+        </div>
+        <div class="wifi-row">
+          <span class="wifi-label">Password</span>
+          <span class="wifi-value">YEUD9RDxerbiEc</span>
+        </div>
+        <div class="wifi-note">Router is to the right of the front door. If WiFi drops, message us via your booking platform.</div>
+      </div>
+
+      <h3 class="sub">Heating</h3>
+      <div class="item"><div class="item-dot"></div><div>The radiators are controlled by smart thermostats which we manage remotely — if you're too warm or too cold, just message us and we'll adjust things straight away.</div></div>
+      <div class="item"><div class="item-dot"></div><div>You can also adjust individual radiators yourself by twisting the head — turn towards <strong>+</strong> to increase the temperature or <strong>−</strong> to decrease it.</div></div>
+      <div class="item"><div class="item-dot"></div><div>There is a <strong>handheld room thermostat in the lounge</strong> which can also be used to change the temperature in that room.</div></div>
+      <div class="warn-box"><strong>Please do not adjust the boiler settings or menu.</strong> The boiler is in the kitchen to the right of the kitchen window. If there's any issue with it, contact us and we'll sort it remotely or send someone out.</div>
+
+      <h3 class="sub">Hot water &amp; shower</h3>
+      <div class="item"><div class="item-dot"></div><div>Hot water is available from the hot tap throughout the cottage.</div></div>
+      <div class="item"><div class="item-dot"></div><div>The left switch outside the bathroom controls the <strong>extractor fan</strong> — please use it during and after showers.</div></div>
+
+      <h3 class="sub">Electricity</h3>
+      <div class="item"><div class="item-dot"></div><div>The fuse box is in the cupboard beside the front door. In the event of a power cut, there is an emergency torch in the drawer under the TV.</div></div>
+      <div class="item"><div class="item-dot"></div><div>For power cut updates, visit <strong>enwl.co.uk</strong>.</div></div>
+      <div class="warn-box"><strong>Please do not touch the fuse box, boiler settings, or any gas fittings.</strong> If something isn't working, message us and we'll get it sorted.</div>
+
+    </div>
+  </div>
+
+  <!-- ===================== THE HOUSE ===================== -->
+  <div id="house" class="tab-panel">
+    <div class="items-list">
+
+      <h3 class="sub">Kitchen</h3>
+      <div class="item"><div class="item-dot"></div><div><strong>Oven</strong> — Bosch electric single oven with fan and grill. Pre-heat for 10–15 minutes. Fan setting for an even bake; grill for browning and toasting.</div></div>
+      <div class="item"><div class="item-dot"></div><div><strong>Hob</strong> — Gas. Hold the igniter for 2–3 seconds after clicking until the flame catches. Wait a moment and try again if it doesn't light first time.</div></div>
+      <div class="item"><div class="item-dot"></div><div><strong>Coffee machine</strong> — Dolce Gusto. A couple of pods are provided to get you started — if you'd like more, these are widely available in supermarkets. Instant coffee sachets are also provided, and there is a cafetière if you prefer to use your own ground coffee.</div></div>
+      <div class="item"><div class="item-dot"></div><div><strong>Fridge &amp; freezer</strong> — small fridge/freezer in the kitchen. There is a large chest freezer in the utility room outside.</div></div>
+      <div class="item"><div class="item-dot"></div><div><strong>Tea, coffee sachets &amp; sugar</strong> are provided to get you started. The kitchen is otherwise fully equipped for self-catering.</div></div>
+      <div class="item"><div class="item-dot"></div><div>Instructions for kitchen appliances are in the <strong>cupboard above the air fryer</strong> if needed.</div></div>
+      <div class="item"><div class="item-dot"></div><div>Please use the <strong>extractor fan</strong> whenever the hob or oven is in use.</div></div>
+      <div class="item"><div class="item-dot"></div><div>Spare bin liners are in the cupboard below the sink.</div></div>
+      <div class="item"><div class="item-dot"></div><div>Please wash up and leave the kitchen as you found it. There is no dishwasher — washing-up liquid and a brush are at the sink.</div></div>
+      <div class="warn-box"><strong>Septic tank — important:</strong> No bleach or bleach-based products anywhere on site — not down the sink, not in the toilet, not for cleaning. Septic-tank-safe products only throughout.</div>
+
+      <h3 class="sub">Living room</h3>
+      <div class="item"><div class="item-dot"></div><div><strong>TV</strong> — Panasonic remote. To change input, press Source and select HDMI. All remotes are on the coffee table.</div></div>
+      <div class="item"><div class="item-dot"></div><div><strong>Streaming</strong> — Roku stick is connected. Free Watch UK works without a login. Netflix, Prime Video, BBC iPlayer, Disney+, ITVX, and Channel 4 all require your own account — log in and out freely.</div></div>
+
+      <h3 class="sub">Log burner</h3>
+      <div class="item"><div class="item-dot"></div><div>Use <strong>4 pieces of kindling and 2 logs</strong> to start a fire. <strong>Only burn wood</strong> — never plastic, treated timber, or any other materials.</div></div>
+      <div class="item"><div class="item-dot"></div><div>Open both bottom air vents and the top air vent fully for the first 5 minutes to allow airflow.</div></div>
+      <div class="item"><div class="item-dot"></div><div>Once established, spin all vents to near-closed to slow the burn.</div></div>
+      <div class="item"><div class="item-dot"></div><div>There is a <strong>temperature gauge</strong> on top of the stove and a convection fan above — the fan starts automatically once the stove is hot enough.</div></div>
+      <div class="warn-box"><strong>Hot surfaces:</strong> Do not touch the sweep handle or door directly — both get extremely hot. Use the door handle turned anti-clockwise to open and close. Never leave the fire unattended with the door open.</div>
+
+      <h3 class="sub">Bedrooms</h3>
+      <div class="two-col">
+        <div class="info-card">
+          <div class="ic-label">Beds</div>
+          <div class="ic-value">1 double bedroom &amp; 2 twin beds</div>
+        </div>
+        <div class="info-card">
+          <div class="ic-label">Towels</div>
+          <div class="ic-value">1 per person — spares in the utility cupboard</div>
+        </div>
+        <div class="info-card">
+          <div class="ic-label">Spare bedding</div>
+          <div class="ic-value">Extra pillows, blankets &amp; bedding in the utility cupboard</div>
+        </div>
+        <div class="info-card">
+          <div class="ic-label">Blackout blinds</div>
+          <div class="ic-value">2 in the double room, 1 in the twin room</div>
+        </div>
+      </div>
+      <div class="item"><div class="item-dot"></div><div>Wardrobes in both bedrooms are available for your use.</div></div>
+
+      <h3 class="sub">Security cameras</h3>
+      <div class="warn-box"><strong>Please note:</strong> There is an external security camera on the side of the shed, above the outdoor seating area. This covers the exterior only — there are no cameras inside the cottage. Footage is stored securely and accessed only if required.</div>
+
+    </div>
+  </div>
+
+  <!-- ===================== OUTSIDE ===================== -->
+  <div id="outside" class="tab-panel">
+    <div class="items-list">
+
+      <h3 class="sub">Parking &amp; utility room</h3>
+      <div class="item"><div class="item-dot"></div><div><strong>Parking</strong> — gravel area in front of the large shed. Up to 4 cars.</div></div>
+      <div class="item"><div class="item-dot"></div><div>The <strong>utility room</strong> is through the left door of the large shed. It contains the washing machine, tumble dryer, outdoor toilet, large chest freezer, and hose.</div></div>
+      <div class="item"><div class="item-dot"></div><div><strong>Washing machine</strong> — laundry pods are provided. Use one pod per load. 40° cotton is ideal for most clothes.</div></div>
+      <div class="item"><div class="item-dot"></div><div><strong>Tumble dryer</strong> — please wipe the lint filter clear after each use to prevent a fire risk.</div></div>
+      <div class="item"><div class="item-dot"></div><div>A washing line and pegs are available in the garden if the weather allows.</div></div>
+      <div class="item"><div class="item-dot"></div><div>Towels for drying pets are hung up in the utility room — please use these rather than the guest towels inside.</div></div>
+
+      <h3 class="sub">Outdoor WC &amp; hose</h3>
+      <div class="item"><div class="item-dot"></div><div>There is an <strong>outdoor toilet</strong> in the utility room — perfect for returning from muddy walks so you don't trail anything through the cottage.</div></div>
+      <div class="item"><div class="item-dot"></div><div>A <strong>hose</strong> is outside for rinsing muddy boots, dogs, and kit. Please coil it back up after use.</div></div>
+
+      <h3 class="sub">Garden &amp; grounds</h3>
+      <div class="item"><div class="item-dot"></div><div>The cottage grounds extend to the gates — you are welcome to walk up to the gate by the chicken coops at the top of the site, but please do not go through any gate into the fields beyond.</div></div>
+      <div class="item"><div class="item-dot"></div><div>There is <strong>barbed wire fencing</strong> along the boundary — please take care, especially with children and dogs.</div></div>
+      <div class="item"><div class="item-dot"></div><div><strong>BBQ</strong> — available for your use. Please clean and cover after use.</div></div>
+      <div class="item"><div class="item-dot"></div><div><strong>Outdoor lighting</strong> — exterior lights switch is by the main entrance and in the living room. Take care on stone steps and patio areas after dark — surfaces can be slippery when wet.</div></div>
+
+      <div class="nature-box">
+        <strong>A note on the grounds:</strong> We do our best to keep the site clear, but as a rural property the wind can occasionally bring in debris and rabbit holes can appear in the grass. Please watch your step — particularly on wet or mossy stone — and keep a close eye on children and dogs when exploring the grounds.
+      </div>
+
+      <h3 class="sub">Sheep &amp; local wildlife</h3>
+      <div class="item"><div class="item-dot"></div><div>On rare occasions a sheep may find its way onto the site. If this happens, please let us know and we'll contact the local farmer — it won't affect your stay.</div></div>
+      <div class="item"><div class="item-dot"></div><div>The sheep may be in lamb. Please keep dogs calm and at a distance, and do not let them approach or chase the sheep under any circumstances.</div></div>
+
+      <h3 class="sub">Gates</h3>
+      <div class="warn-box"><strong>Please always close and latch the gates behind you</strong> — this keeps your pets safe within the grounds and ensures the property stays private and secure. An open gate is an invitation for animals to wander in or out.</div>
+
+    </div>
+  </div>
+
+  <!-- ===================== HOUSE RULES ===================== -->
+  <div id="rules" class="tab-panel">
+    <div class="items-list">
+
+      <h3 class="sub">General rules</h3>
+      <div class="item"><div class="item-dot"></div><div><strong>No smoking</strong> indoors. Smoking is permitted outside — please dispose of cigarettes responsibly and do not drop litter.</div></div>
+      <div class="item"><div class="item-dot"></div><div><strong>No candles</strong> inside the cottage at any time.</div></div>
+      <div class="item"><div class="item-dot"></div><div><strong>Quiet hours</strong> — 10pm to 6am. Please be considerate of neighbours.</div></div>
+      <div class="item"><div class="item-dot"></div><div><strong>No parties or events</strong> without prior written consent.</div></div>
+      <div class="item"><div class="item-dot"></div><div><strong>Max occupancy</strong> — 4 guests overnight, in line with the beds available. Please message before your stay if you need to discuss alternative arrangements.</div></div>
+      <div class="item"><div class="item-dot"></div><div><strong>No bleach</strong> or bleach-based products anywhere on site. Septic-tank-safe products only.</div></div>
+
+      <h3 class="sub">Pets policy</h3>
+      <div class="item"><div class="item-dot"></div><div>Pets are welcome by prior arrangement — please declare them at the time of booking. Undeclared pets are not permitted.</div></div>
+      <div class="item"><div class="item-dot"></div><div>Maximum <strong>3 pets</strong>. Pets must be house-trained, flea-free, and in good health.</div></div>
+      <div class="item"><div class="item-dot"></div><div>Pets are not permitted on beds or furniture at any time.</div></div>
+      <div class="item"><div class="item-dot"></div><div>Pets must not be left unattended in the property unless crated.</div></div>
+      <div class="item"><div class="item-dot"></div><div>Please clean up after your pets inside and outside. Do not use towels, bedding, or soft furnishings for pets.</div></div>
+      <div class="item"><div class="item-dot"></div><div>Any excessive hair, odour, or damage may result in an additional cleaning or repair charge.</div></div>
+      <div class="item"><div class="item-dot"></div><div>Please ensure pets do not disturb neighbours or wildlife — especially the sheep and lambs nearby.</div></div>
+
+      <h3 class="sub">Checkout checklist</h3>
+      <div class="item"><div class="item-dot"></div><div>Strip the beds and leave all used bedding and towels in the bath.</div></div>
+      <div class="item"><div class="item-dot"></div><div>Wash up and leave the kitchen tidy.</div></div>
+      <div class="item"><div class="item-dot"></div><div>Empty the bins — <strong>black bin</strong> for general waste, <strong>blue bin</strong> for recycling (by the garden entrance or beside the conservatory door), <strong>green bin</strong> for garden waste.</div></div>
+      <div class="item"><div class="item-dot"></div><div>Leave the <strong>conservatory key on the table</strong>.</div></div>
+      <div class="item"><div class="item-dot"></div><div>Return the front door key to the lock box and scramble the code.</div></div>
+      <div class="item"><div class="item-dot"></div><div>Turn off all lights, heaters, and electrical appliances. Close all windows.</div></div>
+      <div class="item"><div class="item-dot"></div><div>Close the gates on your way out.</div></div>
+      <div class="highlight-box">Please treat Sandy Gap Cottage as your own home. If anything gets broken or damaged during your stay, just let us know — we always appreciate honesty.</div>
+
+    </div>
+  </div>
+
+  <!-- ===================== LOCAL TIPS ===================== -->
+  <div id="local" class="tab-panel">
+    <div class="rec-grid">
+      <div class="rec-card">
+        <div class="rec-type">Pubs &amp; food</div>
+        <div class="rec-name">Royal Oak, Kings Arms, Longlands</div>
+        <div class="rec-note">Local favourites for food and drink. More great options in Kirkby Lonsdale, Kendal, and Lancaster.</div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-type">Pub &amp; food</div>
+        <div class="rec-name">Crooklands Hotel</div>
+        <div class="rec-note">Worth a visit. Convenient if you're heading toward the M6.</div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-type">Takeaway</div>
+        <div class="rec-name">Jumbo's Chinese</div>
+        <div class="rec-note">Our go-to for a Chinese. Great portions.</div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-type">Takeaway</div>
+        <div class="rec-name">Fish &amp; chip shop — Milnthorpe</div>
+        <div class="rec-note">Classic chippy, perfect after a long walk. Also nearby: Goah Bengal Spice &amp; Flames.</div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-type">Supermarket</div>
+        <div class="rec-name">Aldi / Booths — Carnforth</div>
+        <div class="rec-note">Closest options for your shop. Asda in Kendal for a wider choice.</div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-type">Petrol</div>
+        <div class="rec-name">Truckstop Carnforth / Crooklands / A6 Ascona</div>
+        <div class="rec-note">Several stations nearby — Carnforth Truckstop is the closest.</div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-type">Walks &amp; views</div>
+        <div class="rec-name">Arnside Knot &amp; Scout Scar</div>
+        <div class="rec-note">Stunning views over Morecambe Bay and the fells. Both within 20 minutes of the cottage.</div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-type">Walks &amp; views</div>
+        <div class="rec-name">Kendal Castle Trail &amp; River Kent</div>
+        <div class="rec-note">Great half-day out. Burton Fell and Burton Quarry also worth exploring.</div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-type">Day trip</div>
+        <div class="rec-name">Lake District</div>
+        <div class="rec-note">On your doorstep. Windermere, Ambleside, and Coniston all within easy reach.</div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-type">Day trip</div>
+        <div class="rec-name">Yorkshire Dales &amp; Morecambe</div>
+        <div class="rec-note">Two very different days out — wild open dales or the classic seaside promenade.</div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-type">Getting around</div>
+        <div class="rec-name">Trains, bus &amp; taxis</div>
+        <div class="rec-note">Stations at Carnforth, Arnside &amp; Lancaster. Stagecoach 555 bus. Uber available locally.</div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-type">Medical &amp; pharmacy</div>
+        <div class="rec-name">Ashtrees — Carnforth</div>
+        <div class="rec-note">Nearest GP / walk-in centre and pharmacy. ATM also available in Carnforth.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== HELP & EMERGENCY ===================== -->
+  <div id="emergency" class="tab-panel">
+    <div class="items-list">
+
+      <h3 class="sub">Emergency numbers</h3>
+      <div class="item"><div class="item-dot"></div><div><strong>Emergency services</strong> — 999</div></div>
+      <div class="item"><div class="item-dot"></div><div><strong>Non-emergency police</strong> — 101</div></div>
+      <div class="item"><div class="item-dot"></div><div><strong>NHS non-emergency</strong> — 111</div></div>
+      <div class="item"><div class="item-dot"></div><div><strong>Nearest A&amp;E (main)</strong> — Royal Lancaster Infirmary, approx. 10 miles — <strong>LA1 4RP</strong></div></div>
+      <div class="item"><div class="item-dot"></div><div><strong>Nearest A&amp;E (closer)</strong> — Westmorland General Hospital, Kendal, approx. 10 miles — <strong>LA9 7RG</strong></div></div>
+      <div class="item"><div class="item-dot"></div><div><strong>Nearest vet</strong> — Vets Now Kendal — <strong>01539 887636</strong></div></div>
+      <div class="item"><div class="item-dot"></div><div><strong>Nearest pharmacy</strong> — Ashtrees, Carnforth</div></div>
+
+      <h3 class="sub">Contact your host</h3>
+      <div class="item"><div class="item-dot"></div><div><strong>Elliott</strong> — message via the platform you booked through for anything you need. We aim to respond as quickly as possible.</div></div>
+      <div class="item"><div class="item-dot"></div><div>For maintenance issues — leaks, heating, appliances — please contact us rather than attempting any fixes yourself. We'll arrange everything from our end.</div></div>
+      <div class="highlight-box"><strong>Urgent issues</strong> — water leak, suspected gas, fire, power cut, intruder, or escaped livestock: call 999 first if there is any immediate danger, then message us straight away.</div>
+
+      <h3 class="sub">Safety equipment</h3>
+      <div class="item"><div class="item-dot"></div><div><strong>Fire extinguisher</strong> — kitchen cupboard and in the shed.</div></div>
+      <div class="item"><div class="item-dot"></div><div><strong>Fire blanket</strong> — kitchen cupboard.</div></div>
+      <div class="item"><div class="item-dot"></div><div><strong>First aid kit</strong> — under the kitchen sink.</div></div>
+      <div class="item"><div class="item-dot"></div><div><strong>Smoke alarm</strong> — hallway. Please do not tamper with it.</div></div>
+      <div class="item"><div class="item-dot"></div><div><strong>Carbon monoxide alarm</strong> — living room. Please do not tamper with it.</div></div>
+      <div class="item"><div class="item-dot"></div><div><strong>Emergency torch</strong> — drawer under the TV.</div></div>
+
+      <h3 class="sub">Emergency procedures</h3>
+      <div class="item"><div class="item-dot"></div><div><strong>Fire</strong> — evacuate immediately via the conservatory or main entrance. Close doors behind you. Meet at the parking area. Call 999.</div></div>
+      <div class="item"><div class="item-dot"></div><div><strong>Power cut</strong> — turn off the oven, microwave, and any other high-draw appliances. Use the torch from the TV drawer. Check enwl.co.uk for outage updates.</div></div>
+      <div class="item"><div class="item-dot"></div><div><strong>Water leak</strong> — the stopcock is under the kitchen sink. The water main is at the end of the driveway. Contact us immediately.</div></div>
+      <div class="warn-box"><strong>Please do not touch the gas or electric shutoffs unless directed by emergency services.</strong> If you suspect a gas leak — evacuate immediately, do not operate any switches, and call 999 from outside.</div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p class="tagline">Have a wonderful stay at Sandy Gap Cottage</p>
+    <p>We're just a message away if you need anything at all.</p>
+    <p style="margin-top: 8px; font-size: 11px; opacity: 0.6;">Elliott &nbsp;·&nbsp; Message via your booking platform</p>
+  </div>
+
+</div>
+
+<script>
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById(tab.dataset.tab).classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
